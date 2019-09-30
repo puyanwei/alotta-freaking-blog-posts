@@ -1,0 +1,75 @@
+<!DOCTYPE html><html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>Hooked on React’s Array Destructuring Pattern</title><style>
+      * {
+        font-family: Georgia, Cambria, "Times New Roman", Times, serif;
+      }
+      html, body {
+        margin: 0;
+        padding: 0;
+      }
+      h1 {
+        font-size: 50px;
+        margin-bottom: 17px;
+        color: #333;
+      }
+      h2 {
+        font-size: 24px;
+        line-height: 1.6;
+        margin: 30px 0 0 0;
+        margin-bottom: 18px;
+        margin-top: 33px;
+        color: #333;
+      }
+      h3 {
+        font-size: 30px;
+        margin: 10px 0 20px 0;
+        color: #333;
+      }
+      header {
+        width: 640px;
+        margin: auto;
+      }
+      section {
+        width: 640px;
+        margin: auto;
+      }
+      section p {
+        margin-bottom: 27px;
+        font-size: 20px;
+        line-height: 1.6;
+        color: #333;
+      }
+      section img {
+        max-width: 640px;
+      }
+      footer {
+        padding: 0 20px;
+        margin: 50px 0;
+        text-align: center;
+        font-size: 12px;
+      }
+      .aspectRatioPlaceholder {
+        max-width: auto !important;
+        max-height: auto !important;
+      }
+      .aspectRatioPlaceholder-fill {
+        padding-bottom: 0 !important;
+      }
+      header,
+      section[data-field=subtitle],
+      section[data-field=description] {
+        display: none;
+      }
+      </style></head><body><article class="h-entry">
+<header>
+<h1 class="p-name">Hooked on React’s Array Destructuring Pattern</h1>
+</header>
+<section data-field="subtitle" class="p-summary">
+How does the React’s hooks pattern work?
+</section>
+<section data-field="description" class="p-summary">
+A quick look into the React hooks array destructuring pattern
+</section>
+<section data-field="body" class="e-content">
+<section name="832f" class="section section--body section--first section--last"><div class="section-divider"><hr class="section-divider"></div><div class="section-content"><div class="section-inner sectionLayout--insetColumn"><h3 name="c959" id="c959" class="graf graf--h3 graf--leading graf--title">Hooked on React’s Array Destructuring Pattern</h3><p name="966f" id="966f" class="graf graf--p graf-after--h3">The other day I was reading up on the legendary React God Dan Ambrov’s great but very un-TLDR <a href="https://overreacted.io/a-complete-guide-to-useeffect/#dont-lie-to-react-about-dependencies" data-href="https://overreacted.io/a-complete-guide-to-useeffect/#dont-lie-to-react-about-dependencies" class="markup--anchor markup--p-anchor" rel="noopener" target="_blank">post on useEffect</a>.</p><figure name="0679" id="0679" class="graf graf--figure graf-after--p"><div class="aspectRatioPlaceholder is-locked" style="max-width: 700px; max-height: 360px;"><div class="aspectRatioPlaceholder-fill" style="padding-bottom: 51.4%;"></div><img class="graf-image" data-image-id="1*QD_Xet1q1I5FO8C5dBwWPg.jpeg" data-width="959" data-height="493" data-is-featured="true" src="https://cdn-images-1.medium.com/max/800/1*QD_Xet1q1I5FO8C5dBwWPg.jpeg"></div><figcaption class="imageCaption">Street art in Shoreditch, London. Sometimes I fake it til I make it, but it can come back and bite me in the</figcaption></figure><p name="fde2" id="fde2" class="graf graf--p graf-after--figure">The transition to Hooks has been quite a confusing one actually, as most people assumed (including myself) that the changes were just about the syntax. In fact, the changes are more substantial and it involves rethinking ifecycles and how we restructure the components. This [in progress…] <a href="https://wattenberger.com/blog/react-hooks" data-href="https://wattenberger.com/blog/react-hooks" class="markup--anchor markup--p-anchor" rel="noopener" target="_blank">post</a> shows us the kind of rethinking that are needed…</p><h3 name="a031" id="a031" class="graf graf--h3 graf-after--p">A UseEffect Counter Refactor</h3><p name="e281" id="e281" class="graf graf--p graf-after--h3">The post talks about how this is not correct, the count will always be zero.</p><pre name="7cab" id="7cab" class="graf graf--pre graf-after--p"><code class="markup--code markup--pre-code u-paddingRight0 u-marginRight0">const Counter = () =&gt; {<br>  const [count, setCount] = useState(0);<br><br>  useEffect(() =&gt; {<br>    const id = setInterval(() =&gt; {<br>      setCount(count + 1);<br>    }, 1000);<br>    return () =&gt; clearInterval(id); // Cleanup on &#39;unmounting&#39;<br>  }, <strong class="markup--strong markup--pre-strong">[]</strong>);<br>  return &lt;h1&gt;{count}&lt;/h1&gt;;<br>}</code></pre><p name="9b70" id="9b70" class="graf graf--p graf-after--pre">However putting a watcher on the count state will allow the effect to update correctly.</p><pre name="4e75" id="4e75" class="graf graf--pre graf-after--p"><code class="markup--code markup--pre-code u-paddingRight0 u-marginRight0">useEffect(() =&gt; {<br>  const id = setInterval(() =&gt; {<br>    setCount(count + 1);  }, 1000);<br>  return () =&gt; clearInterval(id);<br>}, <strong class="markup--strong markup--pre-strong">[count]</strong>);</code></pre><p name="b179" id="b179" class="graf graf--p graf-after--pre">This is pretty much going to be the most common way that most of us will conclude with. But Dan Ambrov says that we can level up with another way which would remove the watcher completely!</p><pre name="17de" id="17de" class="graf graf--pre graf-after--p"><code class="markup--code markup--pre-code u-paddingRight0 u-marginRight0">useEffect(() =&gt; {<br>    const id = setInterval(() =&gt; {<br><strong class="markup--strong markup--pre-strong">      setCount(c =&gt; c + 1);    }, 1000);<br></strong>    return () =&gt; clearInterval(id);<br>  }, []);</code></pre><p name="07bb" id="07bb" class="graf graf--p graf-after--pre">Amazing!</p><p name="a072" id="a072" class="graf graf--p graf-after--p">However, if your like me and have been too lazy to fully understand React’s hooks array destructuring then your probably asking…</p><blockquote name="359e" id="359e" class="graf graf--blockquote graf-after--p">Where on earth does that “<strong class="markup--strong markup--blockquote-strong">c</strong>” come from?</blockquote><h3 name="e92e" id="e92e" class="graf graf--h3 graf-after--blockquote">A ‘New’ Trending JS Pattern</h3><p name="f88c" id="f88c" class="graf graf--p graf-after--h3">Maybe not so new, but new to a lot of us and hooks has popularized it to new levels!</p><pre name="8fc1" id="8fc1" class="graf graf--pre graf-after--p"><code class="markup--code markup--pre-code">const [state, setState] = useState(init);</code></pre><p name="0da9" id="0da9" class="graf graf--p graf-after--pre"><em class="markup--em markup--p-em">useState</em> is a function that returns an array of functions…</p><p name="eecc" id="eecc" class="graf graf--p graf-after--p">For example we could mock it up like this;</p><pre name="042b" id="042b" class="graf graf--pre graf-after--p">const useState = (initialState) =&gt; {<br> return [state(initialState), setState(initialState)]<br>}</pre><pre name="c26d" id="c26d" class="graf graf--pre graf-after--pre">const state = (parameter) =&gt; {<br>    return `this is the state function with the parameter - ${parameter}`<br>}</pre><pre name="505f" id="505f" class="graf graf--pre graf-after--pre">const setState = (parameter) =&gt; {<br>    return `this is the setState function with the parameter - ${parameter}`<br>}</pre><p name="454f" id="454f" class="graf graf--p graf-after--pre">Invoking use<em class="markup--em markup--p-em">State </em>would get us;</p><pre name="e958" id="e958" class="graf graf--pre graf-after--p"><strong class="markup--strong markup--pre-strong">useState(99)</strong><br>(2) [&quot;this is the state with the parameter - 99&quot;, &quot;this is the setState with the function parameter - 99&quot;]</pre><pre name="1c5b" id="1c5b" class="graf graf--pre graf-after--pre"><strong class="markup--strong markup--pre-strong">useState(99)[0]</strong><br>&quot;this is the state with the parameter - 99&quot;<br><strong class="markup--strong markup--pre-strong">useState(99)[1]</strong></pre><pre name="4858" id="4858" class="graf graf--pre graf-after--pre">&quot;this is the setState with the parameter - 99&quot;</pre><pre name="746c" id="746c" class="graf graf--pre graf-after--pre"><strong class="markup--strong markup--pre-strong">useState(99)[2]</strong><br>undefined // Element doesn&#39;t exist</pre><p name="353f" id="353f" class="graf graf--p graf-after--pre">Destructuring allows us to rename the returned elements as what they are name to represent themselves</p><pre name="db69" id="db69" class="graf graf--pre graf-after--p"><strong class="markup--strong markup--pre-strong">const [state, setState] = useState(99)</strong></pre><pre name="fd2a" id="fd2a" class="graf graf--pre graf-after--pre">// Equivalent to...</pre><pre name="e583" id="e583" class="graf graf--pre graf-after--pre"><strong class="markup--strong markup--pre-strong">const state = useState(99)[0]</strong><br><strong class="markup--strong markup--pre-strong">const setState = useState(99)[1]</strong></pre><p name="0f59" id="0f59" class="graf graf--p graf-after--pre">But in this instance we get an error;</p><p name="bae4" id="bae4" class="graf graf--p graf-after--p"><em class="markup--em markup--p-em">Uncaught SyntaxError: Identifier ‘state’ has already been declared</em></p><p name="05a0" id="05a0" class="graf graf--p graf-after--p">This is because we already have used the name <em class="markup--em markup--p-em">state </em>in our function expression inside <em class="markup--em markup--p-em">useState.</em></p><p name="78e0" id="78e0" class="graf graf--p graf-after--p">Actually we can use any name we want (that isn’t already used) to represent the first two elements of the returned array from <em class="markup--em markup--p-em">useState</em>;</p><pre name="78ee" id="78ee" class="graf graf--pre graf-after--p"><strong class="markup--strong markup--pre-strong">const [whatIsTheState, changeUpDatState] = useState(99)</strong></pre><pre name="e55e" id="e55e" class="graf graf--pre graf-after--pre"><strong class="markup--strong markup--pre-strong">whatIsTheState<br></strong>&quot;this is the state with the param - 99&quot;</pre><pre name="e2ce" id="e2ce" class="graf graf--pre graf-after--pre"><strong class="markup--strong markup--pre-strong">changeUpDatState<br></strong>&quot;this is the setState with the param - 99&quot;</pre><p name="49b8" id="49b8" class="graf graf--p graf-after--pre">Thanks to Ken C Dodds on his <a href="https://kentcdodds.com/blog/react-hooks-array-destructuring-fundamentals" data-href="https://kentcdodds.com/blog/react-hooks-array-destructuring-fundamentals" class="markup--anchor markup--p-anchor" rel="noopener" target="_blank">post</a> on helping me understand this.</p><h3 name="f50b" id="f50b" class="graf graf--h3 graf-after--p">Rosetta Stone That Counter</h3><p name="dad3" id="dad3" class="graf graf--p graf-after--h3">Aight, lets go back to that counter;</p><pre name="da36" id="da36" class="graf graf--pre graf-after--p"><code class="markup--code markup--pre-code">const Counter = () =&gt; {<br>  const [count, setCount] = useState(0);</code></pre><pre name="0b0f" id="0b0f" class="graf graf--pre graf-after--pre"><code class="markup--code markup--pre-code u-paddingRight0 u-marginRight0">  useEffect(() =&gt; {<br>    const id = setInterval(() =&gt; {<br><strong class="markup--strong markup--pre-strong">        setCount(c =&gt; c + 1);    <br>      }, 1000);<br></strong>      return () =&gt; clearInterval(id);<br>    }, []);</code></pre><pre name="b442" id="b442" class="graf graf--pre graf-after--pre"><code class="markup--code markup--pre-code">    return &lt;h1&gt;{count}&lt;/h1&gt;;<br>}</code></pre><p name="8ae8" id="8ae8" class="graf graf--p graf-after--pre"><em class="markup--em markup--p-em">c</em> is the parameter of setCount, which is the initialState of useState, which is 0 for the first time round.</p><p name="d4af" id="d4af" class="graf graf--p graf-after--p">One is added to <em class="markup--em markup--p-em">c</em> and then is returned as the param for setCount, which sets the new count. This happens every second.</p><p name="beda" id="beda" class="graf graf--p graf-after--p">This means that useEffect is run once on load, and there is no need to keep calling useEffect on each change, as it is all happening once.</p><h3 name="9a33" id="9a33" class="graf graf--h3 graf-after--p">Custom Hooks Potential</h3><p name="952b" id="952b" class="graf graf--p graf-after--h3">The power of this pattern is that it has ton of potential when you start using custom hooks. Features can be abstracted out of the components and have only the relevant data returned within those arrays to be used.</p><pre name="6104" id="6104" class="graf graf--pre graf-after--p">const [name, age, error] = useCustomerDataAPI(key)</pre><p name="0dc4" id="0dc4" class="graf graf--p graf-after--pre">Here this made up custom hook can be setup like this. The hook needs an api key as a parameter and then will return 3 functions which returns a name string, a number age and a boolean error.</p><p name="132a" id="132a" class="graf graf--p graf-after--p">These three functions are able to be used in our component, most likely using error to check if it is false and then rendering the name and age to the page.</p><p name="8d46" id="8d46" class="graf graf--p graf-after--p">I wont go into details of the custom hook itself, will probably require another post. For now, I’m really enjoying the direction that React is going…</p><figure name="bdaf" id="bdaf" class="graf graf--figure graf-after--p"><div class="aspectRatioPlaceholder is-locked" style="max-width: 700px; max-height: 314px;"><div class="aspectRatioPlaceholder-fill" style="padding-bottom: 44.9%;"></div><img class="graf-image" data-image-id="1*Ixa4JX92ELxH9K6KZRK5Gw.jpeg" data-width="958" data-height="430" src="https://cdn-images-1.medium.com/max/800/1*Ixa4JX92ELxH9K6KZRK5Gw.jpeg"></div><figcaption class="imageCaption">Also getting bored of all the same unsplash images that everyone is using, might just add in more personal Street Art photos that I take around London!</figcaption></figure><p name="fa7a" id="fa7a" class="graf graf--p graf-after--figure graf--trailing">Til next time folks, happy coding!</p></div></div></section>
+</section>
+<footer><p>By <a href="https://medium.com/@pyan" class="p-author h-card">Puyan Wei</a> on <a href="https://medium.com/p/bb51c76f3413"><time class="dt-published" datetime="2019-09-23T07:12:14.733Z">September 23, 2019</time></a>.</p><p><a href="https://medium.com/@pyan/hooked-on-reacts-array-destructuring-pattern-bb51c76f3413" class="p-canonical">Canonical link</a></p><p>Exported from <a href="https://medium.com">Medium</a> on September 30, 2019.</p></footer></article></body></html>

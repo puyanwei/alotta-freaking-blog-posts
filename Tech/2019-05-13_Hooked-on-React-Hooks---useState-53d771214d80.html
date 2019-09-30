@@ -1,0 +1,72 @@
+<!DOCTYPE html><html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>Hooked on React Hooks — useState</title><style>
+      * {
+        font-family: Georgia, Cambria, "Times New Roman", Times, serif;
+      }
+      html, body {
+        margin: 0;
+        padding: 0;
+      }
+      h1 {
+        font-size: 50px;
+        margin-bottom: 17px;
+        color: #333;
+      }
+      h2 {
+        font-size: 24px;
+        line-height: 1.6;
+        margin: 30px 0 0 0;
+        margin-bottom: 18px;
+        margin-top: 33px;
+        color: #333;
+      }
+      h3 {
+        font-size: 30px;
+        margin: 10px 0 20px 0;
+        color: #333;
+      }
+      header {
+        width: 640px;
+        margin: auto;
+      }
+      section {
+        width: 640px;
+        margin: auto;
+      }
+      section p {
+        margin-bottom: 27px;
+        font-size: 20px;
+        line-height: 1.6;
+        color: #333;
+      }
+      section img {
+        max-width: 640px;
+      }
+      footer {
+        padding: 0 20px;
+        margin: 50px 0;
+        text-align: center;
+        font-size: 12px;
+      }
+      .aspectRatioPlaceholder {
+        max-width: auto !important;
+        max-height: auto !important;
+      }
+      .aspectRatioPlaceholder-fill {
+        padding-bottom: 0 !important;
+      }
+      header,
+      section[data-field=subtitle],
+      section[data-field=description] {
+        display: none;
+      }
+      </style></head><body><article class="h-entry">
+<header>
+<h1 class="p-name">Hooked on React Hooks — useState</h1>
+</header>
+<section data-field="subtitle" class="p-summary">
+So what’s all the rage with React hooks? I’ve been exploring it for the past few months and lets just say I really believe that this is…
+</section>
+<section data-field="body" class="e-content">
+<section name="973e" class="section section--body section--first section--last"><div class="section-divider"><hr class="section-divider"></div><div class="section-content"><div class="section-inner sectionLayout--insetColumn"><h3 name="5103" id="5103" class="graf graf--h3 graf--leading graf--title">Hooked on React Hooks — useState</h3><h4 name="8635" id="8635" class="graf graf--h4 graf-after--h3 graf--subtitle">So what’s all the rage with React hooks? I’ve been exploring it for the past few months and lets just say I really believe that this is what React has needed to surmount its position as the top front end framework.</h4><figure name="5d2c" id="5d2c" class="graf graf--figure graf-after--h4"><div class="aspectRatioPlaceholder is-locked" style="max-width: 700px; max-height: 393px;"><div class="aspectRatioPlaceholder-fill" style="padding-bottom: 56.2%;"></div><img class="graf-image" data-image-id="0*0G-DQYbrauyBSwGA" data-width="6240" data-height="3504" data-unsplash-photo-id="axqT3qeRwJ8" data-is-featured="true" src="https://cdn-images-1.medium.com/max/800/0*0G-DQYbrauyBSwGA"></div><figcaption class="imageCaption">Photo by <a href="https://unsplash.com/@teracomp?utm_source=medium&amp;utm_medium=referral" data-href="https://unsplash.com/@teracomp?utm_source=medium&amp;utm_medium=referral" class="markup--anchor markup--figure-anchor" rel="photo-creator noopener" target="_blank">Dave Phillips</a> on <a href="https://unsplash.com?utm_source=medium&amp;utm_medium=referral" data-href="https://unsplash.com?utm_source=medium&amp;utm_medium=referral" class="markup--anchor markup--figure-anchor" rel="photo-source noopener" target="_blank">Unsplash</a></figcaption></figure><h4 name="bdb0" id="bdb0" class="graf graf--h4 graf-after--figure">Let’s Get Setup!</h4><p name="459e" id="459e" class="graf graf--p graf-after--h4">Setup your project as shown in this <a href="https://hackernoon.com/reacting-to-react-js-10ff1d50a36c" data-href="https://hackernoon.com/reacting-to-react-js-10ff1d50a36c" class="markup--anchor markup--p-anchor" rel="noopener" target="_blank">post</a>.</p><p name="1d4a" id="1d4a" class="graf graf--p graf-after--p">Then lets <code class="markup--code markup--p-code">npm install --save react@^16.8.0 react-dom@^16.8.0</code></p><p name="14fe" id="14fe" class="graf graf--p graf-after--p">If your adding this to an existing codebase its super important to make sure that the <code class="markup--code markup--p-code">react</code> and <code class="markup--code markup--p-code">react-dom</code> versions are the same. We had some issues where if was throwing an error from the server side not recognising hooks.</p><h4 name="af49" id="af49" class="graf graf--h4 graf-after--p">setState becomes useState</h4><p name="287b" id="287b" class="graf graf--p graf-after--h4">Here we have a component ColourPicker. It toggles between the three colours chosen, with the default on red.</p><pre name="5055" id="5055" class="graf graf--pre graf-after--p">import React, { Component } from &#39;react&#39;;</pre><pre name="cc8f" id="cc8f" class="graf graf--pre graf-after--pre">import &#39;./ColourPicker.css&#39;;</pre><pre name="2e93" id="2e93" class="graf graf--pre graf-after--pre">class ColourPicker extends Component {<br>    constructor() {<br>        super();<br>        this.state = {<br>            colour: &#39;Red&#39;,<br>        };<br>    }<br>    <br>    colourChoice = (colour) =&gt; {<br>        this.props.handleColour(colour);<br>        this.setState({ colour: colour });<br>    };<br>    <br>    render() {<br>        return (<br>            &lt;div className=&quot;colour-picker&quot;&gt;<br>                &lt;p&gt;<br>                    Colour:{&#39; &#39;}<br>                    &lt;span className=&quot;picker-choice&quot;&gt;{this.state.colour}&lt;/span&gt;<br>                &lt;/p&gt;<br>                &lt;button onClick={() =&gt; this.colourChoice(&#39;Blue&#39;)} /&gt;<br>                &lt;button onClick={() =&gt; this.colourChoice(&#39;Cyan&#39;)} /&gt;<br>                &lt;button onClick={() =&gt; this.colourChoice(&#39;Pink&#39;)} /&gt;<br>            &lt;/div&gt;<br>        );<br>    }<br>}<br>export default ColourPicker;</pre><p name="df64" id="df64" class="graf graf--p graf-after--pre">When a button is clicked, it triggers the propped function handleColour from the parent component which will do something there. Now lets check out the React hooks refactor;</p><pre name="8265" id="8265" class="graf graf--pre graf-after--p">import React, { useState } from &quot;react&quot;;</pre><pre name="77c7" id="77c7" class="graf graf--pre graf-after--pre">import &quot;./ColourPicker.css&quot;;</pre><pre name="0198" id="0198" class="graf graf--pre graf-after--pre">const ColourPicker = ({ handleColour }) =&gt; {<br>    const [colour, setColour] = useState(&quot;Red&quot;);</pre><pre name="b37e" id="b37e" class="graf graf--pre graf-after--pre">    const colourChoice = (colour) =&gt; {<br>        setColour(colour);<br>        handleColour(colour);<br>    };</pre><pre name="5326" id="5326" class="graf graf--pre graf-after--pre">    return (<br>        &lt;div className=&quot;colour-picker&quot;&gt;<br>            &lt;p&gt;<br>                {`Colour: `}<br>                &lt;span className=&quot;picker-choice&quot;&gt;{colour}&lt;/span&gt;<br>            &lt;/p&gt;<br>            &lt;button onClick={() =&gt; colourChoice(&quot;Blue&quot;)} /&gt;<br>            &lt;button onClick={() =&gt; colourChoice(&quot;Cyan&quot;)} /&gt;<br>            &lt;button onClick={() =&gt; colourChoice(&quot;Pink&quot;)} /&gt;<br>        &lt;/div&gt;<br>    );<br>};</pre><pre name="969b" id="969b" class="graf graf--pre graf-after--pre">export default ColourPicker;</pre><p name="a9ad" id="a9ad" class="graf graf--p graf-after--pre">First thing we should notice is that we import useState at the top. This is how you import each hook that you want to use.</p><p name="54a2" id="54a2" class="graf graf--p graf-after--p">Next you should notice this line;</p><pre name="ae7e" id="ae7e" class="graf graf--pre graf-after--p">const [colour, setColour] = useState(&quot;Red&quot;);</pre><p name="3b80" id="3b80" class="graf graf--p graf-after--pre">This array destructuring is going to be the format we use the old setState with. There are three parameters we want to add in for every state we want to use, the name of the state, the function name of changing the state, and the state’s default value.</p><pre name="7211" id="7211" class="graf graf--pre graf-after--p">const [stateName, setStateNameNewState] = useState(defaultValue);</pre><p name="229d" id="229d" class="graf graf--p graf-after--pre">With this in mind, check out the function colourChoice that is called on click;</p><pre name="bbda" id="bbda" class="graf graf--pre graf-after--p">const colourChoice = (colour) =&gt; {<br>    setColour(colour);<br>    handleColour(colour);<br>};</pre><p name="25dc" id="25dc" class="graf graf--p graf-after--pre">compared to the old</p><pre name="20ed" id="20ed" class="graf graf--pre graf-after--p">colourChoice = colour =&gt; {<br>        this.props.handleColour(colour);<br>        this.setState({ colour: colour });<br>    };</pre><p name="b34d" id="b34d" class="graf graf--p graf-after--pre">As you can see its much nicer readable syntax.</p><p name="7f3c" id="7f3c" class="graf graf--p graf-after--p">There is no need to always put in a key: value pair anymore, and notice the lack of <code class="markup--code markup--p-code">this</code> and <code class="markup--code markup--p-code">this.props</code> keywords! So much better!</p><h4 name="0270" id="0270" class="graf graf--h4 graf-after--p">Stuff I Like</h4><ul class="postList"><li name="0c71" id="0c71" class="graf graf--li graf-after--h4"><strong class="markup--strong markup--li-strong">Consistent written components</strong> — If everything is pure functions, having this consistency is great. This will make React easier to learn and understand. There’s nothing worse then when you start out learning trying to get your head around <code class="markup--code markup--li-code">jsx</code> syntax, then have it be recommended to write pure functions when you can mixing with the <code class="markup--code markup--li-code">Class</code> syntax.</li><li name="cae6" id="cae6" class="graf graf--li graf-after--li"><strong class="markup--strong markup--li-strong">Better syntax</strong> — Even with the simple example above, you can see how much space is saved, without compromising on the readability of the code. Extra destructuring is not needed. With larger apps, having no <code class="markup--code markup--li-code">this</code>, <code class="markup--code markup--li-code">state</code>, or <code class="markup--code markup--li-code">props</code> keywords can mean a lot more lines code saved which in turn can lead to less syntax and scoping mistakes.</li><li name="8d2e" id="8d2e" class="graf graf--li graf-after--li"><strong class="markup--strong markup--li-strong">Easier to understand, better readability </strong>— This should make code more readable and quicker to understand without all the necessary clutter</li></ul><h4 name="4f9b" id="4f9b" class="graf graf--h4 graf-after--li">Cons</h4><ul class="postList"><li name="d682" id="d682" class="graf graf--li graf-after--h4"><strong class="markup--strong markup--li-strong">Weird / advanced syntax</strong>? — Having this destructured format might be confusing for newer developers. However, React typically has a lot of newer ES6 features which are essential for a smoother experience.</li><li name="a1cc" id="a1cc" class="graf graf--li graf-after--li"><strong class="markup--strong markup--li-strong">Adds more ways of doing things</strong> — Living in Javascript-land, this is a common thing. But I think it can get out of control, especially for new learners. It is quite common to find old deprecated solutions and then find out later down the line that you have done things incorrectly.</li></ul><p name="86cf" id="86cf" class="graf graf--p graf-after--li"><strong class="markup--strong markup--p-strong">Useful References</strong></p><p name="8c6c" id="8c6c" class="graf graf--p graf-after--p">There are some great docs about React and hooks, check out these awesome references if you wanna read more.</p><ul class="postList"><li name="2f48" id="2f48" class="graf graf--li graf-after--p">The official React docs — <a href="https://reactjs.org/docs/hooks-intro.html" data-href="https://reactjs.org/docs/hooks-intro.html" class="markup--anchor markup--li-anchor" rel="noopener" target="_blank">https://reactjs.org/docs/hooks-intro.html</a></li><li name="321a" id="321a" class="graf graf--li graf-after--li">Dan Abrov’s awesome blog — <a href="https://overreacted.io/" data-href="https://overreacted.io/" class="markup--anchor markup--li-anchor" rel="noopener" target="_blank">https://overreacted.io/</a></li><li name="0657" id="0657" class="graf graf--li graf-after--li">Examples of common components using hooks — <a href="https://usehooks.com/" data-href="https://usehooks.com/" class="markup--anchor markup--li-anchor" rel="noopener" target="_blank">https://usehooks.com/</a></li><li name="a4b9" id="a4b9" class="graf graf--li graf-after--li">Amazing illustration explanation of React (and other code related things) — <a href="https://illustrated.dev/" data-href="https://illustrated.dev/" class="markup--anchor markup--li-anchor" rel="noopener" target="_blank">https://illustrated.dev/</a></li></ul><p name="89c1" id="89c1" class="graf graf--p graf-after--li graf--trailing">Next post we’ll check out how hooks deal with lifecycle hooks.</p></div></div></section>
+</section>
+<footer><p>By <a href="https://medium.com/@pyan" class="p-author h-card">Puyan Wei</a> on <a href="https://medium.com/p/53d771214d80"><time class="dt-published" datetime="2019-05-13T07:29:25.542Z">May 13, 2019</time></a>.</p><p><a href="https://medium.com/@pyan/hooked-on-react-hooks-usestate-53d771214d80" class="p-canonical">Canonical link</a></p><p>Exported from <a href="https://medium.com">Medium</a> on September 30, 2019.</p></footer></article></body></html>
