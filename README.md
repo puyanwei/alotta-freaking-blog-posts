@@ -2,9 +2,12 @@
 
 This is just a backup of my blog posts from [Medium](https://www.medium.com/@pyan) in markdown format.
 
-Wanna have this on here for easy reference and possible copying over different publications. Most of the big ones on Medium has moved to their own independent websites now.
+Wanna have this on here for easy reference and possible copying over different publications. Most of the big tech publications on Medium has moved to their own independent websites now.
 
 ### [Makers Academy BootCamp](https://makers.tech/)
+
+Makers is a coding boot camp of which I took part in July 2018 for 3 months. I had decided to blog about the experience weekly.
+
 - [Hello, World( )](https://medium.com/@pyan/hello-world-5e35a3f7c1e8)
 - [Apostrophe Apocalypse](https://medium.com/@pyan/apostrophe-apocalypse-b375158e6b41)
 - [If It Ain’t Broke, Fix It? (And Learn)](https://medium.com/@pyan/if-it-aint-broke-fix-it-and-learn-2fb7f2040217)
