@@ -1,12 +1,10 @@
-# Backup of Blog
+# Puyan Wei Medium Posts
 
 This is just a backup of my blog posts from [Medium](https://www.medium.com/@pyan) in markdown format.
 
-Wanna have this on here for easy reference and possible copying over different publications. Most of the big tech publications on Medium has moved to their own independent websites now.
+## [Makers Academy BootCamp](https://makers.tech/)
 
-### [Makers Academy BootCamp](https://makers.tech/)
-
-Makers is a coding boot camp of which I took part in July 2018 for 3 months. I had decided to blog about the experience weekly.
+Makers is a coding boot camp of which I took part in July 2018 for 4 months. I had decided to blog about the experience weekly.
 
 - [Hello, World( )](https://medium.com/@pyan/hello-world-5e35a3f7c1e8)
 - [Apostrophe Apocalypse](https://medium.com/@pyan/apostrophe-apocalypse-b375158e6b41)
@@ -28,4 +26,40 @@ Makers is a coding boot camp of which I took part in July 2018 for 3 months. I h
 - [Makers Graduation Aftermath...](https://blog.makersacademy.com/makers-aftermath-28e8af1e5548)
 - [Ultimate Job Hunting Guide for Makers Graduates](https://blog.makersacademy.com/ultimate-job-hunting-guide-for-makers-graduates-d2433deb5618)
 
-_Further indexing to come..._
+## General Coding
+
+- [Single Page App - Write a Note!](https://medium.com/@pyan/single-page-app-write-a-note-fa8b49e52de5)
+- [Coding One Year On...](https://medium.com/@pyan/coding-one-year-on-ee275117cccd)
+- [Ruby vs Javascript Kata Comparison](https://medium.com/hackernoon/ruby-javascript-kata-comparison-37470254c445)
+- [Become the Shortcut Master (Part 1) - The Mac and the Terminal](https://medium.com/hackernoon/become-the-shortcut-master-the-mac-and-terminal-part-1-80793d8df033)
+- [Become the Shortcut Master (Part 2) - Chrome and Atom](https://medium.com/hackernoon/become-the-shortcut-master-chrome-and-atom-part-2-c866150caa7)
+- [5 Must Have Apps to Start Out 2018](https://medium.com/@pyan/5-must-have-apps-to-start-out-2018-c24d076cfb9d)
+- [Conditional Coin Flips with Rock Paper Scissors](https://medium.com/hackernoon/conditionally-flipping-a-coin-and-rock-paper-scissors-1174c0e4ff95)
+- [I wrote a Codewars Puzzle and it was a disappointing experience](https://medium.com/hackernoon/i-wrote-a-codewars-puzzle-and-it-was-a-disappointing-experience-d0126d5c1c76)
+- [Recommended Coding Content](https://medium.com/hackernoon/recommended-coding-content-7937d2e4dea5)
+- [2018 Reflections...](https://medium.com/hackernoon/2018-reflections-6840e716b5c2)
+- [32 Favorite Youtube Channels of 2018](https://medium.com/hackernoon/my-youtube-favourites-of-2018-b3f9daa552fb)
+
+## Vue.js
+
+- [A Vue to a View - A Punchbag Game](https://medium.com/hackernoon/a-vue-to-a-view-a-punchbag-game-849bb239629)
+- [Frontend Refactored - Components with Vue](https://medium.com/hackernoon/front-end-refactored-components-with-vue-907a08a3630)
+
+## React.js
+
+- [Reacting to React.js](https://medium.com/hackernoon/reacting-to-react-js-10ff1d50a36c)
+- [The State Bait and This Dot Problems](https://medium.com/hackernoon/recommended-coding-content-7937d2e4dea5)
+- [Quick Snippets - Grabbing Input Data with React](https://medium.com/hackernoon/quick-snippets-grabbing-input-data-with-react-9555c1711fec)
+- [Hooked on React hooks - useState](https://medium.com/hackernoon/hooked-on-react-hooks-usestate-53d771214d80)
+
+## Reviews
+
+- [P-Yan Reviews: Airpods](https://medium.com/@pyan/p-yan-reviews-apple-airpods-bb4e4ad67b8f)
+- [P-Yan Reviews: Youtube Premium (UK)](https://medium.com/hackernoon/p-yan-reviews-youtube-premium-uk-573c5b7c6948)
+
+## Travel
+
+- [Stopover in Hong Kong](https://medium.com/@pyan/stopover-in-hong-kong-8f205c0e151b)
+- [A Week in Seoul](https://medium.com/@pyan/a-week-in-seoul-2598ddcd421f)
+- [The Motherland, Hong Kong](https://medium.com/@pyan/the-motherland-hong-kong-2b99b4102fd3)
+- [Seoul Got Soul! Culture Embraces Culture](https://medium.com/@pyan/seoul-got-soul-e93f25265f3f)
